@@ -15,8 +15,10 @@ public class MyClass {
      * @return true, if and only if the element is contained in the collection
      */
     public static <T> boolean contains(Collection<T> collection, T element) {
+	if (collection == null)
+	    return false;
 	for (T t : collection) {
-	    if (t.equals(element))
+	    if ((t == null && element == null) || (t != null && t.equals(element)))
 		return true;
 	}
 	return false;
