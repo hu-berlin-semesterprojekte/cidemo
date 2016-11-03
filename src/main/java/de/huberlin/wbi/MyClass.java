@@ -14,7 +14,8 @@ public class MyClass {
      *            the element that is to be searched
      * @return true, if and only if the element is contained in the collection
      */
-    public static <T> boolean contains(Collection<T> collection, T element) {
+    @SuppressWarnings("static-method")
+    public <T> boolean contains(Collection<T> collection, T element) {
 	for (T t : collection) {
 	    if (t.equals(element))
 		return true;
