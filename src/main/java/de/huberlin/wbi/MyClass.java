@@ -16,8 +16,10 @@ public class MyClass {
      */
     @SuppressWarnings("static-method")
     public <T> boolean contains(Collection<T> collection, T element) {
+	if (collection == null)
+	    return false;
 	for (T t : collection) {
-	    if (t.equals(element))
+	    if ((t == null && element == null) || (t != null && t.equals(element)))
 		return true;
 	}
 	return false;
