@@ -16,6 +16,36 @@ public class Player {
    * @param routeColor
    * @return
    */
+  public boolean claimRouteNaive(
+      PassengerColor payByColor,
+      int routeCost,
+      PassengerColor routeColor
+  ) {
+    int currentCards = playerCards[payByColor.ordinal()];
+
+    // Pay for a route between two adjacent cities on the map
+    if ( (payByColor == routeColor
+        || payByColor == PassengerColor.Rainbow
+        || routeColor == PassengerColor.Rainbow)) {
+      if (currentCards >= routeCost) {
+        playerCards[payByColor.ordinal()] -= routeCost;
+        return true;
+      }
+    }
+
+    // we cannot buy the route
+    return false;
+
+  }
+
+  /**
+   * Claim a route between two adjacent cities using
+   * the payByColor-passenger-cards in our hand
+   * @param payByColor
+   * @param routeCost
+   * @param routeColor
+   * @return
+   */
   public boolean claimRoute(
           PassengerColor payByColor,
           int routeCost,
@@ -33,7 +63,7 @@ public class Player {
         playerCards[payByColor.ordinal()] -= routeCost;
         return true;
       }
-      // rainbox cards are needed
+      // rainbow cards are needed
       else if (currentCards + rainBowCards >= routeCost){
         playerCards[payByColor.ordinal()]= 0;
         playerCards[PassengerColor.Rainbow.ordinal()] -= (routeCost - currentCards);
@@ -41,7 +71,7 @@ public class Player {
       }
     }
 
-    // we cannot by the route
+    // we cannot buy the route
     return false;
 
   }

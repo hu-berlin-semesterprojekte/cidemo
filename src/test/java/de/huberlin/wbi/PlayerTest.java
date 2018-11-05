@@ -21,13 +21,7 @@ public class PlayerTest {
 
     assertFalse(p.claimRoute(Player.PassengerColor.Black, 2, Player.PassengerColor.Blue));
     assertFalse(p.claimRoute(Player.PassengerColor.Red, 10, Player.PassengerColor.Red));
-
-    // pay by rainbow
-    assertTrue(p.claimRoute(Player.PassengerColor.Black, 3, Player.PassengerColor.Black));
-
-    // double spend
-    // assertTrue(p.claimRoute(Player.PassengerColor.Rainbow, 2, Player.PassengerColor.Red));
-
+    
     //     Blue, Black, Red, Rainbow
     System.out.println(Arrays.toString(p.playerCards));
     for (int c : p.playerCards) {
