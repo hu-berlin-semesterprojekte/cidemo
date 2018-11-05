@@ -88,6 +88,7 @@ public class Player {
       // we cannot buy the route
       return false;
     } catch (Exception e) {
+      e.printStackTrace();
       return false;
     }
 

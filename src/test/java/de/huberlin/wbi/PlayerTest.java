@@ -31,7 +31,7 @@ public class PlayerTest {
 //        p.claimRoute2(Player.PassengerColor.Black, 2, Player.PassengerColor.Rainbow));
 
     // fill with Rainbow
-    assertTrue(
+    assertFalse(
         p.claimRoute2(Player.PassengerColor.Rainbow, 4, Player.PassengerColor.Black));
 
 
