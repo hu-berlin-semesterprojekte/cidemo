@@ -16,7 +16,7 @@ public class Player {
    * @param routeColor
    * @return
    */
-  public boolean claimRouteNaive(
+  public boolean claimRoute(
       PassengerColor payByColor,
       int routeCost,
       PassengerColor routeColor
@@ -38,6 +38,18 @@ public class Player {
 
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
   /**
    * Claim a route between two adjacent cities using
    * the payByColor-passenger-cards in our hand
@@ -46,33 +58,38 @@ public class Player {
    * @param routeColor
    * @return
    */
-  public boolean claimRoute(
+  public boolean claimRoute2(
           PassengerColor payByColor,
           int routeCost,
           PassengerColor routeColor
       ) {
-    int currentCards = playerCards[payByColor.ordinal()];
-    int rainBowCards = playerCards[PassengerColor.Rainbow.ordinal()];
+    try {
+      int currentCards = playerCards[payByColor.ordinal()];
+      int rainBowCards = playerCards[PassengerColor.Rainbow.ordinal()];
 
-    // Pay for a route between two adjacent cities on the map
-    if ( (payByColor == routeColor
-            || payByColor == PassengerColor.Rainbow
-            || routeColor == PassengerColor.Rainbow)) {
-      // no rainbow cards needed
-      if (currentCards >= routeCost) {
-        playerCards[payByColor.ordinal()] -= routeCost;
-        return true;
+      // Pay for a route between two adjacent cities on the map
+      if ((payByColor == routeColor
+          || payByColor == PassengerColor.Rainbow
+          || routeColor == PassengerColor.Rainbow)) {
+        // no rainbow cards needed
+        if (currentCards >= routeCost) {
+          playerCards[payByColor.ordinal()] -= routeCost;
+          return true;
+        }
+        // rainbow cards are needed
+        else if (currentCards + rainBowCards >= routeCost
+            && payByColor != PassengerColor.Rainbow) {
+          playerCards[payByColor.ordinal()] = 0;
+          playerCards[PassengerColor.Rainbow.ordinal()] -= (routeCost - currentCards);
+          return true;
+        }
       }
-      // rainbow cards are needed
-      else if (currentCards + rainBowCards >= routeCost){
-        playerCards[payByColor.ordinal()]= 0;
-        playerCards[PassengerColor.Rainbow.ordinal()] -= (routeCost - currentCards);
-        return true;
-      }
+
+      // we cannot buy the route
+      return false;
+    } catch (Exception e) {
+      return false;
     }
-
-    // we cannot buy the route
-    return false;
 
   }
 
